@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $apiSecretKey: '%sfs_customer.adapter.stripe.apiSecretKey%'
+            $webhookSigningSecret: '%sfs_customer.adapter.stripe.webhookSigningSecret%'
+            $logger: '@?monolog.logger.stripe'
+
+    Softspring\PlatformBundle\Stripe\Transformer\PaymentTransformer: ~
+
+    Softspring\PlatformBundle\Adapter\PaymentAdapterInterface:
+        class: Softspring\PlatformBundle\Stripe\Adapter\PaymentAdapter
+        tags:
+            - { name: 'sfs_platform.adapter', model: 'payment', platform: 'stripe' }
+
+    Softspring\PaymentBundle\Doctrine\EntityListener\StripePaymentEntityListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_payment.payment.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_payment.payment.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_payment.payment.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }

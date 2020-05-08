@@ -1,0 +1,5 @@
+services:
+    Softspring\PlatformBundle\Manager\AdapterManagerInterface:
+        class: Softspring\PlatformBundle\Manager\AdapterManager
+        arguments:
+            $adapters: []

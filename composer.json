@@ -10,12 +10,12 @@
             "Softspring\\PlatformBundle\\": ""
         },
         "exclude-from-classmap": [
-            "/tests/"
+            "/Tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Softspring\\PlatformBundle\\Tests\\": "tests/"
+            "Softspring\\PlatformBundle\\Tests\\": "Tests/"
         }
     },
     "extra": {

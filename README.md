@@ -17,3 +17,16 @@ Open a command console, enter your project directory and execute:
 ```console
 $ composer require softspring/platform-bundle
 ```
+
+
+# Configuration
+
+## Mapping XML
+
+        <!-- Softspring\PlatformBundle\Model\PlatformObjectTrait -->
+        <field name="platform" column="platform" type="smallint" nullable="true"><options><option name="unsigned">true</option></options></field>
+        <field name="platformId" column="platform_id" type="string" nullable="true" />
+        <field name="platformData" column="platform_data" type="json" nullable="true" />
+        <field name="platformLastSync" column="platform_last_sync" type="integer" nullable="true"><options><option name="unsigned">true</option></options></field>
+        <field name="platformConflict" column="platform_conflict" type="boolean" nullable="false"><options><option name="default">0</option></options></field>
+        <field name="testMode" column="platform_test_mode" type="boolean" nullable="false"><options><option name="default">0</option></options></field>
