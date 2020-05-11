@@ -5,7 +5,6 @@ namespace Softspring\PlatformBundle\Adapter;
 use Softspring\PlatformBundle\Exception\PlatformException;
 use Softspring\SubscriptionBundle\Model\SubscriptionInterface;
 use Softspring\PlatformBundle\Exception\SubscriptionException;
-use Softspring\PlatformBundle\Response\SubscriptionResponse;
 
 interface SubscriptionAdapterInterface extends PlatformAdapterInterface
 {
@@ -53,11 +52,11 @@ interface SubscriptionAdapterInterface extends PlatformAdapterInterface
      * @param mixed $plan
      * @param array $options
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function subscribe($customer, $plan, array $options = []): SubscriptionResponse;
+    public function subscribe($customer, $plan, array $options = []);
 
     /**
      * @param mixed $customer
@@ -65,66 +64,66 @@ interface SubscriptionAdapterInterface extends PlatformAdapterInterface
      * @param int   $days
      * @param array $options
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function trial($customer, $plan, int $days, array $options = []): SubscriptionResponse;
+    public function trial($customer, $plan, int $days, array $options = []);
 
     /**
      * @param mixed $subscription
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function details($subscription): SubscriptionResponse;
+    public function details($subscription);
 
     /**
      * @param mixed $subscription
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function cancelRenovation($subscription): SubscriptionResponse;
+    public function cancelRenovation($subscription);
 
     /**
      * @param mixed $subscription
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function uncancelRenovation($subscription): SubscriptionResponse;
+    public function uncancelRenovation($subscription);
 
     /**
      * @param mixed $subscription
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function cancel($subscription): SubscriptionResponse;
+    public function cancel($subscription);
 
     /**
      * @param       $subscription
      * @param       $plan
      * @param array $options
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function upgrade($subscription, $plan, array $options = []): SubscriptionResponse;
+    public function upgrade($subscription, $plan, array $options = []);
 
     /**
      * @param mixed $subscription
      * @param mixed $plan
      *
-     * @return SubscriptionResponse
+     * @return mixed
      *
      * @throws SubscriptionException
      */
-    public function finishTrial($subscription, $plan): SubscriptionResponse;
+    public function finishTrial($subscription, $plan);
 }

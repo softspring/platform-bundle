@@ -3,6 +3,7 @@
 namespace Softspring\PlatformBundle\DependencyInjection;
 
 use Softspring\CustomerBundle\Model\CustomerInterface;
+use Softspring\PlatformBundle\Stripe as StripePlatform;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,35 +24,52 @@ class SfsPlatformExtension extends Extension
         // load services
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
         $loader->load('manager.yaml');
+
+        $container->setParameter('sfs_platform.single_platform', $config['platform']);
+        $container->setParameter('sfs_platform.platforms_configs', $this->getPlatformsConfig($config));
+        $loader->load('providers/static_platform.yaml');
+
         $this->loadCustomerResources($loader, $container, $config);
-        $this->loadStripeResources($loader, $container, $config);
+        $this->loadStripePlatform($loader, $container, $config);
     }
 
     protected function loadCustomerResources(YamlFileLoader $loader, ContainerBuilder $container, array $config): void
     {
-        if (!class_exists(CustomerInterface::class)) {
+        if (!interface_exists(CustomerInterface::class)) {
             return;
         }
 
-        if (class_exists(\Softspring\PlatformBundle\Stripe\Adapter\CustomerAdapter::class)) {
-
+        if (class_exists(StripePlatform\Adapter\CustomerAdapter::class)) {
+            $loader->load('stripe_platform/sfs_customer.yaml');
         }
-
-
     }
 
-    protected function loadStripeResources(YamlFileLoader $loader, ContainerBuilder $container, array $config): void
+    protected function loadStripePlatform(YamlFileLoader $loader, ContainerBuilder $container, array $config): void
     {
-        if (isset($config['stripe']['enabled']) && true === $config['stripe']['enabled']) {
-            $container->setParameter('sfs_platform.stripe.secret_key', $config['stripe']['secret_key']);
-            $container->setParameter('sfs_platform.stripe.public_key', $config['stripe']['public_key']);
-            $container->setParameter('sfs_platform.stripe.webhook_key', $config['stripe']['webhook_key']);
-        }
-
-        if (!class_exists(\Softspring\PlatformBundle\Stripe\Event\WebhookEventFactory::class)) {
+        if (!isset($config['stripe']['enabled']) && true !== $config['stripe']['enabled']) {
             return;
         }
 
+        if (!class_exists(StripePlatform\Event\WebhookEventFactory::class)) {
+            throw new \Exception('Stripe platform bridge package is required, install with composer require softpring/stripe-platform');
+        }
+
+        $loader->load('stripe_platform/stripe.yaml');
         $loader->load('stripe_platform/webhook_factory.yaml');
+    }
+
+    protected function getPlatformsConfig(array $config): array
+    {
+        $platformConfig = [];
+
+        if (isset($config['stripe']['enabled']) && true === $config['stripe']['enabled']) {
+            $platformConfig['stripe'] = [
+                'secret_key' => $config['stripe']['secret_key'],
+                'public_key' => $config['stripe']['public_key'],
+                'webhook_key' => $config['stripe']['webhook_key'],
+            ];
+        }
+
+        return $platformConfig;
     }
 }

@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     Softspring\PlatformBundle\Manager\AdapterManagerInterface:
         class: Softspring\PlatformBundle\Manager\AdapterManager
         arguments:

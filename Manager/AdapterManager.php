@@ -33,4 +33,24 @@ class AdapterManager implements AdapterManagerInterface
 
         return $this->adapters[$platform][$adapter];
     }
+
+    /**
+     * @param string $adapter
+     *
+     * @return PlatformAdapterInterface[]
+     */
+    public function getByType(string $adapter): array
+    {
+        $adapters = [];
+
+        foreach ($this->adapters as $platform => $platformAdapters) {
+            foreach ($platformAdapters as $platformAdapterName => $platformAdapter) {
+                if ($platformAdapterName == $adapter) {
+                    $adapters[$platformAdapterName] = $platformAdapter;
+                }
+            }
+        }
+
+        return $adapters;
+    }
 }

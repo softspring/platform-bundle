@@ -3,7 +3,6 @@
 namespace Softspring\PlatformBundle\Adapter;
 
 use Softspring\SubscriptionBundle\Model\ProductInterface;
-use Softspring\PlatformBundle\Response\ProductListResponse;
 
 interface ProductAdapterInterface extends PlatformAdapterInterface
 {
@@ -23,7 +22,7 @@ interface ProductAdapterInterface extends PlatformAdapterInterface
     public function delete(ProductInterface $product): void;
 
     /**
-     * @return ProductListResponse
+     * @return mixed[]
      */
-    public function list(): ProductListResponse;
+    public function list(): array;
 }

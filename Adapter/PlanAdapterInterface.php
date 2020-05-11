@@ -3,7 +3,6 @@
 namespace Softspring\PlatformBundle\Adapter;
 
 use Softspring\SubscriptionBundle\Model\PlanInterface;
-use Softspring\PlatformBundle\Response\PlanListResponse;
 
 interface PlanAdapterInterface extends PlatformAdapterInterface
 {
@@ -29,7 +28,7 @@ interface PlanAdapterInterface extends PlatformAdapterInterface
     public function delete(PlanInterface $plan);
 
     /**
-     * @return PlanListResponse
+     * @return mixed[]
      */
-    public function list(): PlanListResponse;
+    public function list(): array;
 }

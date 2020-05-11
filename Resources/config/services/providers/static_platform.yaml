@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $platform: '%sfs_platform.single_platform%'
+            $platformsConfig: '%sfs_platform.platforms_configs%'
+
+    Softspring\PlatformBundle\Provider\PlatformProviderInterface:
+        class: Softspring\PlatformBundle\Provider\StaticPlatformProvider
+
+    Softspring\PlatformBundle\Provider\CredentialsProviderInterface:
+        class: Softspring\PlatformBundle\Provider\StaticCredentialsProvider

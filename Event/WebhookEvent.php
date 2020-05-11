@@ -7,7 +7,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 class WebhookEvent extends Event
 {
     /**
-     * @var int
+     * @var string
      */
     protected $platform;
 
@@ -24,11 +24,11 @@ class WebhookEvent extends Event
     /**
      * WebhookEvent constructor.
      *
-     * @param int    $platform
+     * @param string $platform
      * @param string $eventName
      * @param mixed  $platformData
      */
-    public function __construct(int $platform, string $eventName, $platformData)
+    public function __construct(string $platform, string $eventName, $platformData)
     {
         $this->platform = $platform;
         $this->eventName = $eventName;
@@ -36,9 +36,9 @@ class WebhookEvent extends Event
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPlatform(): int
+    public function getPlatform(): string
     {
         return $this->platform;
     }

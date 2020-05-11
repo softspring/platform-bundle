@@ -3,45 +3,43 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-        bind:
-            $apiSecretKey: '%sfs_customer.adapter.stripe.apiSecretKey%'
-            $webhookSigningSecret: '%sfs_customer.adapter.stripe.webhookSigningSecret%'
-            $logger: '@?monolog.logger.stripe'
+#        bind:
+#            $apiSecretKey: '%sfs_platform.stripe.secret_key%'
+#            $webhookSigningSecret: '%sfs_platform.stripe.webhook_key%'
+#            $logger: '@?monolog.logger.stripe'
 
-    Softspring\PlatformBundle\Platform\Adapter\CustomerAdapterInterface:
-        class: Softspring\PlatformBundle\Platform\Adapter\Stripe\CustomerAdapter
-        tags:
-            - { name: 'sfs_platform.adapter', model: 'customer' }
+    Softspring\PlatformBundle\Stripe\Transformer\CustomerTransformer: ~
 
-    Softspring\PlatformBundle\Platform\Adapter\SourceAdapterInterface:
-        class: Softspring\PlatformBundle\Platform\Adapter\Stripe\SourceAdapter
+    Softspring\PlatformBundle\Stripe\Adapter\CustomerAdapter:
         tags:
-          - { name: 'sfs_platform.adapter', model: 'source' }
+            - { name: 'sfs_platform.adapter', model: 'customer', platform: 'stripe' }
 
-    Softspring\PlatformBundle\Platform\Adapter\AddressAdapterInterface:
-        class: Softspring\PlatformBundle\Platform\Adapter\Stripe\AddressAdapter
-        tags:
-          - { name: 'sfs_platform.adapter', model: 'address' }
+#    Softspring\PlatformBundle\Stripe\Adapter\SourceAdapter:
+#        tags:
+#          - { name: 'sfs_platform.adapter', model: 'source', platform: 'stripe' }
+#
+#    Softspring\PlatformBundle\Stripe\Adapter\AddressAdapter:
+#        tags:
+#          - { name: 'sfs_platform.adapter', model: 'address', platform: 'stripe' }
 
-    Softspring\PlatformBundle\Platform\Adapter\NotifyAdapterInterface:
-        class: Softspring\PlatformBundle\Platform\Adapter\Stripe\NotifyAdapter
-        tags:
-            - { name: 'sfs_platform.adapter', model: 'notify' }
+##    Softspring\PlatformBundle\Stripe\Adapter\NotifyAdapter:
+##        tags:
+##            - { name: 'sfs_platform.adapter', model: 'notify', platform: 'stripe' }
+#
+#    Softspring\PlatformBundle\Stripe\EntityListener\AddressEntityListener:
+#        tags:
+#            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+#            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+#            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
 
-    Softspring\PlatformBundle\Doctrine\EntityListener\StripeAddressEntityListener:
+    Softspring\PlatformBundle\Stripe\EntityListener\CustomerEntityListener:
         tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-
-    Softspring\PlatformBundle\Doctrine\EntityListener\StripeCustomerEntityListener:
-        tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.customer.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
             - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.customer.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.customer.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
             - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.customer.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
 
-    Softspring\PlatformBundle\Doctrine\EntityListener\StripeSourceEntityListener:
-        tags:
-            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+#    Softspring\PlatformBundle\Stripe\EntityListener\SourceEntityListener:
+#        tags:
+#            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+#            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+#            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.source.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }

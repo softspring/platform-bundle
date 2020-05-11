@@ -4,7 +4,7 @@ namespace Softspring\PlatformBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 use Softspring\CoreBundle\Controller\AbstractController;
-use Softspring\PlatformBundle\Event\WebhookEventFactory;
+use Softspring\PlatformBundle\Event\WebhookChainEventFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -12,7 +12,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class WebhookController extends AbstractController
 {
     /**
-     * @var WebhookEventFactory
+     * @var WebhookChainEventFactory
      */
     protected $webhookEventFactory;
 
@@ -29,11 +29,11 @@ class WebhookController extends AbstractController
     /**
      * WebhookController constructor.
      *
-     * @param WebhookEventFactory      $webhookEventFactory
+     * @param WebhookChainEventFactory $webhookEventFactory
      * @param EventDispatcherInterface $eventDispatcher
      * @param LoggerInterface|null     $logger
      */
-    public function __construct(WebhookEventFactory $webhookEventFactory, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger)
+    public function __construct(WebhookChainEventFactory $webhookEventFactory, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger)
     {
         $this->webhookEventFactory = $webhookEventFactory;
         $this->eventDispatcher = $eventDispatcher;

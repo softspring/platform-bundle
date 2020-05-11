@@ -4,7 +4,7 @@ namespace Softspring\PlatformBundle\Event;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class WebhookEventFactory
+class WebhookChainEventFactory
 {
     /**
      * @var WebhookEventFactoryInterface[]

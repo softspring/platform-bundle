@@ -2,13 +2,12 @@
 
 namespace Softspring\PlatformBundle\Exception;
 
-use Softspring\PlatformBundle\PlatformInterface;
 use Throwable;
 
 class PlatformException extends \Exception
 {
     /**
-     * @var int
+     * @var string
      */
     protected $platformId;
 
@@ -17,7 +16,16 @@ class PlatformException extends \Exception
      */
     protected $platformError;
 
-    public function __construct(int $platformId, string $platformError, $message = "", $code = 0, Throwable $previous = null)
+    /**
+     * PlatformException constructor.
+     *
+     * @param string         $platformId
+     * @param string         $platformError
+     * @param string         $message
+     * @param int            $code
+     * @param Throwable|null $previous
+     */
+    public function __construct(string $platformId, string $platformError, $message = "", $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->platformId = $platformId;
@@ -25,9 +33,9 @@ class PlatformException extends \Exception
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPlatformId(): int
+    public function getPlatformId(): string
     {
         return $this->platformId;
     }
@@ -45,15 +53,6 @@ class PlatformException extends \Exception
      */
     public function getTranslationTag(): string
     {
-        switch ($this->getPlatformId()) {
-            case PlatformInterface::PLATFORM_STRIPE:
-                return 'platform_error.stripe.'.$this->getPlatformError();
-
-            case PlatformInterface::PLATFORM_APP:
-                return 'platform_error.app.'.$this->getPlatformError();
-
-            default:
-                return 'platform_error.unknown.'.$this->getPlatformError();
-        }
+        return sprintf('platform_error.%s.%s', $this->getPlatformId(), $this->getPlatformError());
     }
 }

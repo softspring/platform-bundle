@@ -14,6 +14,11 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->enumNode('platform')
+                    ->values(['stripe'])
+                    ->defaultNull()
+                ->end()
+
                 ->arrayNode('stripe')
                     ->canBeEnabled()
                     ->children()
