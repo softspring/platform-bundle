@@ -5,21 +5,9 @@ namespace Softspring\PlatformBundle\Model;
 interface PlatformObjectInterface
 {
     /**
-     * @return int|null
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    public function getPlatform(): ?int;
-
-    /**
      * @return string|null
      */
     public function getPlatformId(): ?string;
-
-    /**
-     * @param int|null $platform
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    public function setPlatform(?int $platform): void;
 
     /**
      * @param string|null $platformId

@@ -8,12 +8,6 @@ namespace Softspring\PlatformBundle\Model;
 trait PlatformObjectTrait
 {
     /**
-     * @var int|null
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    protected $platform;
-
-    /**
      * @var string|null
      */
     protected $platformId;
@@ -37,24 +31,6 @@ trait PlatformObjectTrait
      * @var bool
      */
     protected $platformTestMode = false;
-
-    /**
-     * @return int|null
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    public function getPlatform(): ?int
-    {
-        return $this->platform;
-    }
-
-    /**
-     * @param int|null $platform
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    public function setPlatform(?int $platform): void
-    {
-        $this->platform = $platform;
-    }
 
     /**
      * @return string|null
