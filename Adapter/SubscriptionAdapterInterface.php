@@ -3,8 +3,8 @@
 namespace Softspring\PlatformBundle\Adapter;
 
 use Softspring\PlatformBundle\Exception\PlatformException;
+use Softspring\SubscriptionBundle\Model\PlanInterface;
 use Softspring\SubscriptionBundle\Model\SubscriptionInterface;
-use Softspring\PlatformBundle\Exception\SubscriptionException;
 
 interface SubscriptionAdapterInterface extends PlatformAdapterInterface
 {
@@ -12,7 +12,6 @@ interface SubscriptionAdapterInterface extends PlatformAdapterInterface
      * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     * @throws SubscriptionException
      * @throws PlatformException
      */
     public function create(SubscriptionInterface $subscription);
@@ -23,107 +22,57 @@ interface SubscriptionAdapterInterface extends PlatformAdapterInterface
      * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     * @throws SubscriptionException
      * @throws PlatformException
      */
     public function get(SubscriptionInterface $subscription);
 
     /**
-     * Updates the subscription in platform
-     *
      * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     * @throws SubscriptionException
      * @throws PlatformException
      */
-    public function update(SubscriptionInterface $subscription);
-
-
-
-
-
-
+    public function cancelRenovation(SubscriptionInterface $subscription);
 
     /**
-     * @deprecated Use create method
-     *
-     * @param mixed $customer
-     * @param mixed $plan
-     * @param array $options
+     * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     *
-     * @throws SubscriptionException
+     * @throws PlatformException
      */
-    public function subscribe($customer, $plan, array $options = []);
+    public function uncancelRenovation(SubscriptionInterface $subscription);
 
     /**
-     * @param mixed $customer
-     * @param mixed $plan
-     * @param int   $days
-     * @param array $options
+     * @param SubscriptionInterface $subscription
+     * @param PlanInterface         $fromPlan
+     * @param PlanInterface         $toPlan
      *
      * @return mixed
-     *
-     * @throws SubscriptionException
+     * @throws PlatformException
      */
-    public function trial($customer, $plan, int $days, array $options = []);
+    public function upgradePlan(SubscriptionInterface $subscription, PlanInterface $fromPlan, PlanInterface $toPlan);
 
     /**
-     * @param mixed $subscription
+     * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     *
-     * @throws SubscriptionException
+     * @throws PlatformException
      */
-    public function details($subscription);
+    public function cancel(SubscriptionInterface $subscription);
 
     /**
-     * @param mixed $subscription
+     * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     *
-     * @throws SubscriptionException
+     * @throws PlatformException
      */
-    public function cancelRenovation($subscription);
+    public function trial(SubscriptionInterface $subscription);
 
     /**
-     * @param mixed $subscription
+     * @param SubscriptionInterface $subscription
      *
      * @return mixed
-     *
-     * @throws SubscriptionException
+     * @throws PlatformException
      */
-    public function uncancelRenovation($subscription);
-
-    /**
-     * @param mixed $subscription
-     *
-     * @return mixed
-     *
-     * @throws SubscriptionException
-     */
-    public function cancel($subscription);
-
-    /**
-     * @param       $subscription
-     * @param       $plan
-     * @param array $options
-     *
-     * @return mixed
-     *
-     * @throws SubscriptionException
-     */
-    public function upgrade($subscription, $plan, array $options = []);
-
-    /**
-     * @param mixed $subscription
-     * @param mixed $plan
-     *
-     * @return mixed
-     *
-     * @throws SubscriptionException
-     */
-    public function finishTrial($subscription, $plan);
+    public function finishTrial(SubscriptionInterface $subscription);
 }

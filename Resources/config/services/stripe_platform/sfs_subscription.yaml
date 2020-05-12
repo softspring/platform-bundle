@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PlatformBundle\Stripe\Transformer\SubscriptionTransformer: ~
+
+    Softspring\PlatformBundle\Stripe\EventListener\SubscriptionListener:
+        tags: ['kernel.event_subscriber']
+
+    Softspring\PlatformBundle\Stripe\Adapter\SubscriptionAdapter:
+        tags:
+            - { name: 'sfs_platform.adapter', model: 'subscription', platform: 'stripe' }
