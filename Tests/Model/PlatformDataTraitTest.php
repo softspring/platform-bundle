@@ -5,7 +5,6 @@ namespace Softspring\PlatformBundle\Tests\Model;
 use PHPUnit\Framework\TestCase;
 use Softspring\PlatformBundle\Model\PlatformObjectInterface;
 use Softspring\PlatformBundle\Model\PlatformObjectTrait;
-use Softspring\PlatformBundle\PlatformInterface;
 
 class PlatformDataTraitTest extends TestCase
 {
@@ -14,15 +13,11 @@ class PlatformDataTraitTest extends TestCase
         /** @var PlatformObjectInterface $trait */
         $trait = $this->getObjectForTrait(PlatformObjectTrait::class);
 
-        $this->assertNull($trait->getPlatform());
         $this->assertNull($trait->getPlatformId());
         $this->assertNull($trait->getPlatformLastSync());
         $this->assertNull($trait->getPlatformData());
         $this->assertFalse($trait->isTestMode());
         $this->assertFalse($trait->isPlatformConflict());
-
-        $trait->setPlatform(PlatformInterface::PLATFORM_STRIPE);
-        $this->assertEquals(PlatformInterface::PLATFORM_STRIPE, $trait->getPlatform());
 
         $trait->setPlatformId('obj_test_id');
         $this->assertEquals('obj_test_id', $trait->getPlatformId());
