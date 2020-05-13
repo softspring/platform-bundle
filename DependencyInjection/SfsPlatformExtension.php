@@ -3,6 +3,7 @@
 namespace Softspring\PlatformBundle\DependencyInjection;
 
 use Softspring\CustomerBundle\Model\CustomerInterface;
+use Softspring\PaymentBundle\Model\PaymentInterface;
 use Softspring\PlatformBundle\Stripe as StripePlatform;
 use Softspring\SubscriptionBundle\Model\SubscriptionInterface;
 use Symfony\Component\Config\Definition\Processor;
@@ -31,6 +32,7 @@ class SfsPlatformExtension extends Extension
         $loader->load('providers/static_platform.yaml');
 
         $this->loadCustomerResources($loader, $container, $config);
+        $this->loadPaymentResources($loader, $container, $config);
         $this->loadSubscriptionResources($loader, $container, $config);
         $this->loadStripePlatform($loader, $container, $config);
     }
@@ -44,6 +46,17 @@ class SfsPlatformExtension extends Extension
         if (class_exists(StripePlatform\Adapter\CustomerAdapter::class)) {
             $loader->load('stripe_platform/sfs_customer.yaml');
             $loader->load('stripe_platform/sfs_customer_source.yaml');
+        }
+    }
+
+    protected function loadPaymentResources(YamlFileLoader $loader, ContainerBuilder $container, array $config): void
+    {
+        if (!interface_exists(PaymentInterface::class)) {
+            return;
+        }
+
+        if (class_exists(StripePlatform\Adapter\PaymentAdapter::class)) {
+            $loader->load('stripe_platform/sfs_payment_payment.yaml');
         }
     }
 

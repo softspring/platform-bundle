@@ -10,19 +10,15 @@ services:
         tags:
             - { name: 'sfs_platform.adapter', model: 'customer', platform: 'stripe' }
 
-#    Softspring\PlatformBundle\Stripe\Adapter\AddressAdapter:
-#        tags:
-#          - { name: 'sfs_platform.adapter', model: 'address', platform: 'stripe' }
+    Softspring\PlatformBundle\Stripe\Adapter\AddressAdapter:
+        tags:
+          - { name: 'sfs_platform.adapter', model: 'address', platform: 'stripe' }
 
-##    Softspring\PlatformBundle\Stripe\Adapter\NotifyAdapter:
-##        tags:
-##            - { name: 'sfs_platform.adapter', model: 'notify', platform: 'stripe' }
-#
-#    Softspring\PlatformBundle\Stripe\EntityListener\AddressEntityListener:
-#        tags:
-#            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-#            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
-#            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+    Softspring\PlatformBundle\Stripe\EntityListener\AddressEntityListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_customer.address.class%' } # , entity_manager: '%sfs_customer.entity_manager_name%' }
 
     Softspring\PlatformBundle\Stripe\EntityListener\CustomerEntityListener:
         tags:
