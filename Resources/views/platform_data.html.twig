@@ -1,0 +1,9 @@
+{% if is_granted('ROLE_ADMIN_PLATFORM_DATA') and sfs_platform_get(platformObject) %}
+    <h3>{{ sfs_platform_get(platformObject)|capitalize }} dev data</h3>
+    Id: {{ platformObject.platformId }}<br/>
+    Last sync: {{ platformObject.platformLastSync|date('H:i:s d-m-Y') }}<br/>
+    Test: {{ platformObject.testMode ? 'yes' : 'no' }}<br/>
+    Conflict: {{ platformObject.platformConflict ? 'yes' : 'no' }}<br/>
+
+    {{ dump(platformObject.platformData) }}
+{% endif %}
