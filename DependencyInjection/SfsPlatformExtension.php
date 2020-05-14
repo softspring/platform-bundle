@@ -58,6 +58,7 @@ class SfsPlatformExtension extends Extension
         if (class_exists(StripePlatform\Adapter\PaymentAdapter::class)) {
             $loader->load('stripe_platform/sfs_payment_payment.yaml');
             $loader->load('stripe_platform/sfs_payment_concept.yaml');
+            $loader->load('stripe_platform/sfs_payment_invoice.yaml');
         }
     }
 
