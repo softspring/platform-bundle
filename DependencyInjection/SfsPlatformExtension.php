@@ -32,6 +32,7 @@ class SfsPlatformExtension extends Extension
         $loader->load('providers/static_platform.yaml');
         $loader->load('controllers/webhook.yaml');
         $loader->load('webhook_factory.yaml');
+        $loader->load('twig_extension.yaml');
 
         $this->loadCustomerResources($loader, $container, $config);
         $this->loadPaymentResources($loader, $container, $config);
