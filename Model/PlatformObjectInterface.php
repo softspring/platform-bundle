@@ -53,4 +53,14 @@ interface PlatformObjectInterface
      * @param bool $platformConflict
      */
     public function setPlatformConflict(bool $platformConflict): void;
+
+    /**
+     * @return bool
+     */
+    public function isPlatformWebhooked(): bool;
+
+    /**
+     * @param bool $platformWebhooked
+     */
+    public function setPlatformWebhooked(bool $platformWebhooked): void;
 }

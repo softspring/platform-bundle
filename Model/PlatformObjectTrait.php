@@ -33,6 +33,12 @@ trait PlatformObjectTrait
     protected $platformTestMode = false;
 
     /**
+     * Do not save this value in database, is internal
+     * @var bool
+     */
+    protected $platformWebhooked = false;
+
+    /**
      * @return string|null
      */
     public function getPlatformId(): ?string
@@ -128,5 +134,21 @@ trait PlatformObjectTrait
     public function setPlatformConflict(bool $platformConflict): void
     {
         $this->platformConflict = $platformConflict;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPlatformWebhooked(): bool
+    {
+        return $this->platformWebhooked;
+    }
+
+    /**
+     * @param bool $platformWebhooked
+     */
+    public function setPlatformWebhooked(bool $platformWebhooked): void
+    {
+        $this->platformWebhooked = $platformWebhooked;
     }
 }

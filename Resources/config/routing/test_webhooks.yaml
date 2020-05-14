@@ -1,0 +1,5 @@
+sfs_payment_test_stripe_wh_invoice_create:
+    controller: Softspring\PlatformBundle\Controller\WebhookDevelopmentController::stripeWebhook
+    path: /stripe/{webhook}
+    requirements:
+        webhook: .+

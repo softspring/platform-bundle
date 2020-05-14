@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PlatformBundle\Controller\WebhookController:
+        tags: ['controller.service_arguments']
+
+    Softspring\PlatformBundle\Controller\WebhookDevelopmentController:
+        tags: ['controller.service_arguments']

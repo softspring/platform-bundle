@@ -30,6 +30,8 @@ class SfsPlatformExtension extends Extension
         $container->setParameter('sfs_platform.single_platform', $config['platform']);
         $container->setParameter('sfs_platform.platforms_configs', $this->getPlatformsConfig($config));
         $loader->load('providers/static_platform.yaml');
+        $loader->load('controllers/webhook.yaml');
+        $loader->load('webhook_factory.yaml');
 
         $this->loadCustomerResources($loader, $container, $config);
         $this->loadPaymentResources($loader, $container, $config);
@@ -85,6 +87,7 @@ class SfsPlatformExtension extends Extension
 
         $loader->load('stripe_platform/stripe.yaml');
         $loader->load('stripe_platform/webhook_factory.yaml');
+        $loader->load('stripe_platform/webhook_listeners.yaml');
     }
 
     protected function getPlatformsConfig(array $config): array

@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PlatformBundle\Stripe\EventListener\Webhook\:
+        resource: '../../../../stripe-platform/EventListener/Webhook'
+        tags: ['kernel.event_subscriber']

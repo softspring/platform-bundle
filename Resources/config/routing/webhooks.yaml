@@ -1,0 +1,3 @@
+sfs_platform_webhook:
+    controller: Softspring\PlatformBundle\Controller\WebhookController::notify
+    path: /

@@ -48,7 +48,7 @@ class WebhookController extends AbstractController
     {
         try {
             if ($event = $this->webhookEventFactory->create($request)) {
-                $this->eventDispatcher->dispatch($event);
+                $this->eventDispatcher->dispatch($event, sprintf('sfs_platform.%s_webhook.%s', $event->getPlatform(), $event->getName()));
             }
 
             return new Response('', Response::HTTP_OK);

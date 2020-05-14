@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Softspring\PlatformBundle\Event\WebhookChainEventFactory:
+        arguments:
+            $factories: !tagged_iterator sfs_platform.webhook_event_factory

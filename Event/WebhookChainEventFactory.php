@@ -16,7 +16,7 @@ class WebhookChainEventFactory
      *
      * @param WebhookEventFactoryInterface[] $factories
      */
-    public function __construct(array $factories)
+    public function __construct($factories)
     {
         $this->factories = $factories;
     }
