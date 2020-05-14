@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $logger: '@?monolog.logger.stripe'
+
+    Softspring\PlatformBundle\Stripe\Transformer\DiscountTransformer: ~
+
+    Softspring\PlatformBundle\Stripe\Adapter\DiscountAdapter:
+        tags:
+            - { name: 'sfs_platform.adapter', model: 'discount', platform: 'stripe' }
+
+    Softspring\PlatformBundle\Stripe\EntityListener\DiscountEntityListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', method: 'preUpdate', entity: '%sfs_payment.discount.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'prePersist', method: 'prePersist', entity: '%sfs_payment.discount.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', method: 'preRemove', entity: '%sfs_payment.discount.class%' } # , entity_manager: '%sfs_payment.entity_manager_name%' }
