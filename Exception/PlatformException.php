@@ -27,7 +27,7 @@ class PlatformException extends \Exception
      */
     public function __construct(string $platformId, string $platformError, $message = "", $code = 0, Throwable $previous = null)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message ?: $platformError, $code, $previous);
         $this->platformId = $platformId;
         $this->platformError = $platformError;
     }
