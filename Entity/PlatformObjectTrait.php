@@ -10,13 +10,6 @@ trait PlatformObjectTrait
     use PlatformObjectTraitModel;
 
     /**
-     * @var int|null
-     * @ORM\Column(name="platform", type="smallint", nullable=true, options={"unsigned":true})
-     * @deprecated Will be optional, depends on project. Some projects has only one platform, and others could have more
-     */
-    protected $platform;
-
-    /**
      * @var string|null
      * @ORM\Column(name="platform_id", type="string", nullable=true)
      */
