@@ -40,7 +40,7 @@ class StaticCredentialsProvider implements CredentialsProviderInterface
                 return new StripeCredentials($config['secret_key'], $config['public_key'], $config['webhook_key']);
         }
 
-        throw new PlatformException($platform, 'Platform is not supported');
+        throw new PlatformException("$platform", 'Platform is not supported');
     }
 
     public function getCredentialsFromWebhook(Request $request): CredentialsInterface
