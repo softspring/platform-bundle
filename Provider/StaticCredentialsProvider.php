@@ -34,6 +34,11 @@ class StaticCredentialsProvider implements CredentialsProviderInterface
     {
         $platform = $this->platformProvider->getPlatform($dbObject);
 
+        return $this->getPlatformCredentials($platform);
+    }
+
+    public function getPlatformCredentials(string $platform): CredentialsInterface
+    {
         switch ($platform) {
             case 'stripe':
                 $config = $this->platformsConfig['stripe'];

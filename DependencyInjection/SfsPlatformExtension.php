@@ -75,6 +75,10 @@ class SfsPlatformExtension extends Extension
         if (class_exists(StripePlatform\Adapter\SubscriptionAdapter::class)) {
             $loader->load('stripe_platform/sfs_subscription.yaml');
         }
+
+        if (class_exists(StripePlatform\Adapter\PlanAdapter::class)) {
+            $loader->load('stripe_platform/sfs_subscription_plan.yaml');
+        }
     }
 
     protected function loadStripePlatform(YamlFileLoader $loader, ContainerBuilder $container, array $config): void

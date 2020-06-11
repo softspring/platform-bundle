@@ -46,7 +46,7 @@ class AdapterManager implements AdapterManagerInterface
         foreach ($this->adapters as $platform => $platformAdapters) {
             foreach ($platformAdapters as $platformAdapterName => $platformAdapter) {
                 if ($platformAdapterName == $adapter) {
-                    $adapters[$platformAdapterName] = $platformAdapter;
+                    $adapters[$platform] = $platformAdapter;
                 }
             }
         }

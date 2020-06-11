@@ -2,6 +2,8 @@
 
 namespace Softspring\PlatformBundle\Adapter;
 
+use Doctrine\Common\Collections\Collection;
+use Softspring\PlatformBundle\Transformer\PlatformTransformerInterface;
 use Softspring\SubscriptionBundle\Model\PlanInterface;
 
 interface PlanAdapterInterface extends PlatformAdapterInterface
@@ -28,7 +30,12 @@ interface PlanAdapterInterface extends PlatformAdapterInterface
     public function delete(PlanInterface $plan);
 
     /**
-     * @return mixed[]
+     * @return Collection
      */
-    public function list(): array;
+    public function list(): Collection;
+
+    /**
+     * @return PlatformTransformerInterface|null
+     */
+    public function getTransformer(): ?PlatformTransformerInterface;
 }
