@@ -3,8 +3,10 @@
 namespace Softspring\PlatformBundle\Adapter;
 
 use Softspring\PlatformBundle\Exception\PlatformException;
+use Softspring\PlatformBundle\Model\PlatformObjectInterface;
 use Softspring\SubscriptionBundle\Model\PlanInterface;
 use Softspring\SubscriptionBundle\Model\SubscriptionInterface;
+use Stripe\Subscription;
 
 interface SubscriptionAdapterInterface extends PlatformAdapterInterface
 {
@@ -15,6 +17,14 @@ interface SubscriptionAdapterInterface extends PlatformAdapterInterface
      * @throws PlatformException
      */
     public function create(SubscriptionInterface $subscription);
+
+    /**
+     * @param SubscriptionInterface|PlatformObjectInterface $subscription
+     *
+     * @return Subscription
+     * @throws PlatformException
+     */
+    public function update(SubscriptionInterface $subscription);
 
     /**
      * Retrieve the subscription platform data
