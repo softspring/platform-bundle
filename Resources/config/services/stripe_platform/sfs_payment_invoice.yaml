@@ -8,6 +8,9 @@ services:
 
     Softspring\PlatformBundle\Stripe\Transformer\InvoiceTransformer: ~
 
+    Softspring\PlatformBundle\Stripe\EventListener\InvoiceListener:
+        tags: ['kernel.event_subscriber']
+
     Softspring\PlatformBundle\Stripe\Adapter\InvoiceAdapter:
         tags:
             - { name: 'sfs_platform.adapter', model: 'invoice', platform: 'stripe' }
