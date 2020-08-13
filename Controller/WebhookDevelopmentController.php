@@ -4,8 +4,8 @@ namespace Softspring\PlatformBundle\Controller;
 
 use Softspring\CoreBundle\Controller\AbstractController;
 use Softspring\PlatformBundle\Provider\CredentialsProviderInterface;
+use Softspring\PlatformBundle\Stripe\Client\StripeClient;
 use Softspring\PlatformBundle\Stripe\Client\StripeCredentials;
-use Stripe\Webhook;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -24,6 +24,29 @@ class WebhookDevelopmentController extends AbstractController
     public function __construct(CredentialsProviderInterface $credentialsProvider)
     {
         $this->credentialsProvider = $credentialsProvider;
+    }
+
+    public function dispatchEvent(string $event)
+    {
+        /** @var StripeCredentials $credentials */
+        $credentials = $this->credentialsProvider->getCredentialsFromWebhook(new Request());
+
+        $client = new StripeClient($credentials->getApiSecretKey(), $credentials->getWebhookSigningSecret(), null);
+
+        $event = $client->eventRetrieve($event);
+        $content = $event->toJSON();
+
+        // create subrequest
+        $request = new Request([], [], [], [], [], [], $content);
+        $request->attributes->set('_controller', 'Softspring\PlatformBundle\Controller\WebhookController::notify');
+
+        // add stripe signature
+        $request->server->set('HTTP_STRIPE_SIGNATURE', $this->getStripeSignatureHeader($content, $credentials->getWebhookSigningSecret()));
+
+        $httpKernel = $this->container->get('http_kernel');
+        $subResponse = $httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
+
+        return $this->json($event->toArray());
     }
 
     public function stripeWebhook(string $webhook)

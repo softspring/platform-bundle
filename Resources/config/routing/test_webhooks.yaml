@@ -1,5 +1,11 @@
-sfs_payment_test_stripe_wh_invoice_create:
+sfs_payment_test_stripe_webhook:
     controller: Softspring\PlatformBundle\Controller\WebhookDevelopmentController::stripeWebhook
-    path: /stripe/{webhook}
+    path: /stripe/webhook/{webhook}
     requirements:
         webhook: .+
+
+sfs_payment_test_stripe_dispatch_event:
+    controller: Softspring\PlatformBundle\Controller\WebhookDevelopmentController::dispatchEvent
+    path: /stripe/event/{event}
+    requirements:
+        event: .+
