@@ -5,5 +5,7 @@
     Test: {{ platformObject.testMode ? 'yes' : 'no' }}<br/>
     Conflict: {{ platformObject.platformConflict ? 'yes' : 'no' }}<br/>
 
-    {{ dump(platformObject.platformData) }}
+    {% if app.debug %}
+        {{ dump(platformObject.platformData) }}
+    {% endif %}
 {% endif %}
